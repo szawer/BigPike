@@ -11,8 +11,18 @@
 <body>
 <div class="container-fluid">
     <div>
-        <nav class="navbar navbar-expand">
-            <img th:src="@{/images/BigPikeLogoSmall.png}" />
+        <nav class="navbar navbar-expand bg-dark navbar-dark">
+            <a class="navbar-brand" th:href="@{/}">
+                <img th:src="@{/images/BigPikeLogoSmall.png}" />
+            </a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/users}"> Users</a>
+                    </li>
+
+                </ul>
+            </div>
         </nav>
     </div>
     <div>
