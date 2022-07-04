@@ -117,7 +117,7 @@
 
         <div class="text-center">
             <input type="submit" value="Save" class="btn-primary m-3" />
-            <input type="button" value="Cancel" class="btn-secondary"/>
+            <input type="button" value="Cancel" class="btn-secondary" id="buttonCancel"/>
         </div>
     </div>
     </form>
@@ -125,5 +125,12 @@
         <p>BigPike Control Panel - Copyright &copy; BigPike</p>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#buttonCancel").on("click", function(){
+            window.location = "[[@{/users}]]";
+        });
+    });
+</script>
 </body>
 </html>
