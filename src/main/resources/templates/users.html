@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0">
     <title>BigPike Admin Control Panel</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
+
     <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
@@ -13,7 +16,7 @@
     <div>
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
             <a class="navbar-brand" th:href="@{/}">
-                <img th:src="@{/images/BigPikeLogoSmall.png}" />
+                <img th:src="@{/images/pikelogo2.jpg}" />
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -82,14 +85,21 @@
             <tbody>
             <tr th:each="user: ${listUsers}">
                 <td>[[${user.id}]]</td>
-                <td></td>
+                <td><span class="fas fa-portrait fa-3x icon-silver"></span> </td>
                 <td>[[${user.email}]]</td>
                 <td>[[${user.firstName}]]</td>
                 <td>[[${user.lastName}]]</td>
                 <td>[[${user.roles}]]</td>
-                <td>[[${user.enabled}]]</td>
+
                 <td>
-                    Edit &nbsp; Delete
+                    <a th:if="${user.enabled == true}" class="fas fa-check-circle fa-2x icon-green" href=""></a>
+                    <a th:if="${user.enabled == false}" class="fas fa-check-circle fa-2x icon-red" href=""></a>
+                </td>
+
+                <td>
+                    <a class="fa-solid fa-square-pen fa-3x icon-blue" href=""></a>
+                    &nbsp;
+                    <a class="fa-solid fa-trash-can fa-3x icon-dark" href=""></a>
                 </td>
             </tr>
             </tbody>
