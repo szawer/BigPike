@@ -40,20 +40,28 @@ public class UserController {
         return "user_form";
     }
     @PostMapping("/users/save")
-    public String saveUser(User user, RedirectAttributes redirectAttributes,
-                           @RequestParam("image")MultipartFile multipartFile) throws IOException {
-        if (multipartFile.isEmpty()){
-            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-            user.setPhotos(fileName);
-            User savedUser = service.save(user);
-            String uploadDir = "user-photos/" + savedUser.getId();
-            FileUploadUtil.saveFile(uploadDir,fileName,multipartFile);
-        }
+        public String saveUser(User user, RedirectAttributes redirectAttributes,
+                @RequestParam("image") MultipartFile multipartFile) throws IOException {
 
-//        service.save(user);
-        redirectAttributes.addFlashAttribute("message", "The user has been saved successfully!");
-        return "redirect:/users";
-    }
+            if (!multipartFile.isEmpty()) {
+                String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+                user.setPhotos(fileName);
+                User savedUser = service.save(user);
+
+                String uploadDir = "user-photos/" + savedUser.getId();
+
+                FileUploadUtil.cleanDir(uploadDir);
+                FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
+            } else {
+                if (user.getPhotos().isEmpty()) user.setPhotos(null);
+                service.save(user);
+            }
+
+            redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
+
+            return "redirect:/users";
+        }
     @GetMapping("/users/edit/{id}")
     public String editUser(@PathVariable(name = "id") Integer id,
                            Model model,
